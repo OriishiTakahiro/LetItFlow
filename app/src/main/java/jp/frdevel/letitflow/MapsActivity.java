@@ -4,7 +4,10 @@ import android.location.Location;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -28,6 +31,7 @@ public class MapsActivity extends MapsActivityBase {
     protected final String TAG = "FireRubyDev MapGPSample";
 
     private Marker mMarker;
+    private GroundOverlayOptions mOverlay;
 
     @Override
     public void onResume() {
@@ -37,10 +41,19 @@ public class MapsActivity extends MapsActivityBase {
 
     @Override
     public void initializeMap() {
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(18.0f));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15.0f));
         mMarker = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(0, 0)).visible(false));
         mMarker.setTitle("your position");
+        // TODO Retrieve image from server: This is local
+        LatLngBounds bounds = new LatLngBounds(
+                new LatLng(  33.88480983,  134.6542902),
+                new LatLng(  33.91108717,  134.6806122)
+        );
+        mOverlay = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.mipmap.hazard))
+                .positionFromBounds(bounds);
+        mMap.addGroundOverlay(mOverlay);
     }
 
     @Override
