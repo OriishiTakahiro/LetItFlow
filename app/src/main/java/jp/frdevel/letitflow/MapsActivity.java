@@ -62,6 +62,23 @@ public class MapsActivity extends MapsActivityBase {
                 .image(BitmapDescriptorFactory.fromResource(R.mipmap.hazard3))
                 .positionFromBounds(bounds);
         mMap.addGroundOverlay(mOverlay);
+
+        // TODO Retrieve path from direction api: This is local
+        // Instantiates a new Polyline object and adds points to define a rectangle
+        PolylineOptions rectOptions = new PolylineOptions()
+                .add(new LatLng(33.897966, 134.667483))
+                .add(new LatLng(33.898233, 134.666507))
+                .add(new LatLng(33.899151, 134.666947))
+                .add(new LatLng(33.899249, 134.666604))
+                .add(new LatLng(33.901671, 134.668449))
+                .add(new LatLng(33.903389, 134.668696))
+                .add(new LatLng(33.903478, 134.667516))
+                .add(new LatLng(33.903291, 134.667419))
+                .add(new LatLng(33.903381, 134.667226));
+
+        // Get back the mutable Polyline
+        Polyline polyline = mMap.addPolyline(rectOptions);
+
     }
 
     @Override
